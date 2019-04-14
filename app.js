@@ -2,7 +2,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-server.listen(3001);
+server.listen(8100);
 
 app.get('/', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
@@ -13,6 +13,9 @@ app.get('/', function (req, res) {
     if (clients.length == Object.keys(io.sockets.sockets).length){
       res.end(JSON.stringify({ 'clients':  clients}));
     }
+  }
+  if (Object.keys(io.sockets.sockets).length == 0){
+    res.end(JSON.stringify({ 'clients':  []}));
   }
 });
 
