@@ -28,7 +28,7 @@ app.get('/send', function (req, res) {
 
 io.on('connection', function (socket) {
   console.log(socket.id);
-  socket.emit('message', { title: 'hello', body: 'welcome' });
+  //socket.emit('message', { title: 'hello', body: 'welcome' });
   socket.on('my other event', function (data) {
     console.log(data);
   });
