@@ -1,6 +1,8 @@
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
 
 server.listen(8100);
 
@@ -19,9 +21,9 @@ app.get('/', function (req, res) {
   }
 });
 
-app.get('/send', function (req, res) {
-  console.log(req.query);
-  io.to(req.query.id).emit('message', { title: req.query.title, body: req.query.body});
+app.post('/send', function (req, res) {
+  console.log(req.body);
+  io.to(req.body.id).emit('message', { title: req.body.title, body: req.body.body});
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify({ 'result': 'Request Processed' }));
 });
