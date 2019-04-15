@@ -1,5 +1,6 @@
 var app = require('express')();
-var https = require('https')
+var https = require('https');
+var fs = require('fs');
 var server = https.createServer({
   key: fs.readFileSync('/home/projects/ssl/webinar.ut.ac.ir.nopass.key'),
   cert: fs.readFileSync('/home/projects/ssl/webinar.ut.ac.irSSLCertificate.crt')
