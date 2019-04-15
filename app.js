@@ -1,5 +1,12 @@
 var app = require('express')();
 var https = require('https')
+var server = https.createServer({
+  key: fs.readFileSync('/home/projects/ssl/webinar.ut.ac.ir.nopass.key'),
+  cert: fs.readFileSync('/home/projects/ssl/webinar.ut.ac.irSSLCertificate.crt')
+}, app).listen(4200, () => {
+  console.log('Listening...')
+})
+
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser')
 var nodeMailer = require('nodemailer');
@@ -9,12 +16,6 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 
 //server.listen(4200);
 
-https.createServer({
-  key: fs.readFileSync('/home/projects/ssl/webinar.ut.ac.ir.nopass.key'),
-  cert: fs.readFileSync('/home/projects/ssl/webinar.ut.ac.irSSLCertificate.crt')
-}, app).listen(4200, () => {
-  console.log('Listening...')
-})
 
 
 
